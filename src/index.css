@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply m-0 bg-navy text-slate font-sans text-xl leading-relaxed antialiased;
+    @apply overflow-x-hidden min-h-screen;
+  }
+
+  ::selection {
+    @apply bg-navy-lightest text-slate-lightest;
+  }
+
+  /* Scrollbar Styles */
+  ::-webkit-scrollbar {
+    @apply w-3;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-navy;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-dark rounded-lg;
+    border: 3px solid #0a192f;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold text-slate-lightest leading-tight;
+  }
+
+  a {
+    @apply inline-block no-underline transition-colors duration-300;
+  }
+
+  a:hover {
+    @apply text-green;
+  }
+}
+
+@layer components {
+  .big-heading {
+    @apply text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold m-0;
+  }
+
+  .numbered-heading {
+    @apply flex items-center relative my-10 w-full text-2xl md:text-3xl lg:text-heading whitespace-nowrap;
+  }
+
+  .numbered-heading::before {
+    counter-increment: section;
+    content: '0' counter(section) '.';
+    @apply relative bottom-1 mr-2 md:mr-4 text-green font-mono text-lg md:text-xl font-normal;
+  }
+
+  .numbered-heading::after {
+    content: '';
+    @apply block relative -top-1 w-full max-w-xs h-px ml-5 md:ml-8 bg-navy-lightest;
+  }
+
+  .btn {
+    @apply inline-block px-7 py-5 border-2 border-green text-green rounded font-mono text-sm transition-all duration-300;
+    @apply hover:bg-green/10;
+  }
+
+  .btn-big {
+    @apply btn text-md px-8 py-6;
+  }
+}
+
+@layer utilities {
+  .section-padding {
+    @apply py-24 md:py-32;
+  }
+
+  .container-custom {
+    @apply max-w-6xl mx-auto px-6 md:px-12 lg:px-24;
+  }
+}
+
+/* Counter for numbered headings */
+main {
+  counter-reset: section;
+}
+
+/* Blob animations for gradient background */
+@keyframes blob {
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  25% {
+    transform: translate(20px, -50px) scale(1.1);
+  }
+
+  50% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  75% {
+    transform: translate(50px, 50px) scale(1.05);
+  }
+}
+
+.animate-blob {
+  animation: blob 20s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Enhanced button hover - breathing effect */
+@keyframes breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.btn,
+.btn-big {
+  transition: all 0.3s ease;
+}
+
+.btn:hover,
+.btn-big:hover {
+  animation: breathe 2s ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
+}
+
+/* Link underline animation */
+a {
+  position: relative;
+}
+
+a:not(.btn):not(.btn-big)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--green);
+  transition: width 0.3s ease;
+}
+
+a:not(.btn):not(.btn-big):hover::after {
+  width: 100%;
+}
